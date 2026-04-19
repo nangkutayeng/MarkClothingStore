@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MARK CLOTHING STORE – Meerut's Favourite Fashion Destination</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #faf7f2;
+    --cream: #f0ebe1;
+    --accent: #e8421a;
+    --gold: #c9962a;
+    --wa: #25D366;
+    --wa-dark: #128C7E;
+    --mid: #6b6460;
+    --border: #ddd8ce;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── UTILITY ── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff;
+    padding: 14px 28px; border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background .2s, transform .15s;
+  }
+  .btn-primary:hover { background: #c93514; transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--ink);
+    padding: 12px 24px; border-radius: 4px; border: 2px solid var(--ink);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .95rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+    transition: background .2s, color .2s;
+  }
+  .btn-outline:hover { background: var(--ink); color: #fff; }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .8rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1;
+    color: var(--ink);
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: var(--ink); color: #fff;
+    padding: 10px 0; overflow: hidden;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .9rem; letter-spacing: .06em; font-weight: 600;
+  }
+  .ticker-inner {
+    display: flex; gap: 60px; width: max-content;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker-inner span { white-space: nowrap; }
+  .ticker-inner span::before { content: '●'; color: var(--accent); margin-right: 14px; }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky; top: 0; z-index: 900;
+    background: var(--paper); border-bottom: 1.5px solid var(--border);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; gap: 12px;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: .06em; line-height: 1; color: var(--ink);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .logo small {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .6rem; font-weight: 600; letter-spacing: .14em;
+    color: var(--mid); line-height: 1.2;
+  }
+
+  nav { display: none; }
+  @media(min-width:768px){
+    nav { display: flex; gap: 24px; }
+    nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--accent); }
+  }
+
+  .header-actions { display: flex; gap: 10px; align-items: center; }
+  .wa-header {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--wa); color: #fff;
+    padding: 9px 14px; border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: .85rem; letter-spacing: .06em; text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  /* ── HAMBURGER ── */
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: .3s; }
+  @media(min-width:768px){ .hamburger { display: none; } }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav {
+    display: none; flex-direction: column;
+    background: var(--ink); padding: 0 20px;
+    max-height: 0; overflow: hidden; transition: max-height .35s ease;
+  }
+  .mobile-nav.open { display: flex; max-height: 400px; }
+  .mobile-nav a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.3rem; letter-spacing: .06em; text-transform: uppercase;
+    color: #fff; text-decoration: none;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; overflow: hidden;
+    min-height: clamp(480px, 90vh, 740px);
+    background: var(--ink);
+    display: flex; align-items: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(160deg, rgba(232,66,26,.18) 0%, transparent 55%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,.012) 0px, rgba(255,255,255,.012) 1px, transparent 1px, transparent 24px);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px; opacity: .05;
+  }
+  .hero-number {
+    position: absolute; right: -10px; bottom: -20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(140px, 28vw, 320px); line-height: 1;
+    color: rgba(255,255,255,.04); user-select: none; pointer-events: none;
+    letter-spacing: -.02em;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 60px 24px;
+    max-width: 640px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,66,26,.15); border: 1px solid rgba(232,66,26,.4);
+    color: #f4896a; padding: 6px 14px; border-radius: 100px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero-badge::before { content: '●'; color: var(--accent); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.4rem, 12vw, 7.5rem); line-height: .95;
+    color: #fff; letter-spacing: .02em;
+    margin-bottom: 16px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+
+  .hero-sub {
+    font-size: 1.05rem; color: rgba(255,255,255,.7);
+    margin-bottom: 32px; line-height: 1.55; font-weight: 300;
+  }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;
+  }
+  .pill {
+    background: rgba(255,255,255,.08); color: rgba(255,255,255,.8);
+    padding: 6px 14px; border-radius: 100px; border: 1px solid rgba(255,255,255,.15);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .8rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  }
+
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-price-tag {
+    display: flex; align-items: center; gap: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .85rem; font-weight: 600; color: rgba(255,255,255,.55);
+    padding-left: 4px;
+  }
+  .hero-price-tag strong { color: #fff; font-size: 1.1rem; }
+
+  /* ── CATEGORIES ── */
+  .categories { padding: 64px 0; background: var(--cream); }
+  .section-head { margin-bottom: 36px; }
+  .cats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media(min-width:640px){ .cats-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media(min-width:900px){ .cats-grid { grid-template-columns: repeat(5, 1fr); } }
+
+  .cat-card {
+    position: relative; overflow: hidden;
+    border-radius: 8px; cursor: pointer;
+    aspect-ratio: 3/4;
+    background: var(--ink);
+    transition: transform .25s;
+  }
+  .cat-card:hover { transform: translateY(-4px); }
+  .cat-card .cat-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem; color: rgba(255,255,255,.06);
+    letter-spacing: .02em;
+  }
+  .cat-card .cat-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(15,14,13,.9) 0%, transparent 60%);
+  }
+  .cat-card .cat-icon {
+    position: absolute; top: 18px; right: 18px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .cat-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 20px 16px;
+  }
+  .cat-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; letter-spacing: .04em;
+    color: #fff; line-height: 1; margin-bottom: 4px;
+  }
+  .cat-info p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .75rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(255,255,255,.55);
+  }
+  .cat-card.featured { grid-column: span 2; }
+  .cat-card.featured .cat-info h3 { font-size: 2rem; }
+
+  /* color strips per cat */
+  .cat-shirts  { background: linear-gradient(135deg,#1a2a4a,#0f1e36); }
+  .cat-combos  { background: linear-gradient(135deg,#2d1a0e,#1a0e05); }
+  .cat-jeans   { background: linear-gradient(135deg,#0d1f35,#1b3050); }
+  .cat-new     { background: linear-gradient(135deg,#3b1515,#1a0707); }
+  .cat-boys    { background: linear-gradient(135deg,#15302a,#0a1f1a); }
+
+  /* ── PRICE BANDS ── */
+  .price-section { padding: 64px 0; }
+  .price-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media(min-width:600px){ .price-grid { grid-template-columns: repeat(4,1fr); } }
+
+  .price-card {
+    border: 2px solid var(--border); border-radius: 8px;
+    padding: 28px 18px; text-align: center;
+    cursor: pointer; transition: border-color .2s, transform .2s;
+    text-decoration: none; color: var(--ink);
+    display: block;
+  }
+  .price-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .price-card .pc-range {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; color: var(--accent);
+  }
+  .price-card .pc-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .8rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--mid);
+    margin-top: 6px;
+  }
+  .price-card .pc-icon { font-size: 1.8rem; margin-bottom: 8px; }
+
+  /* ── PRODUCTS ── */
+  .products-section { padding: 64px 0; background: var(--cream); }
+  .prod-grid {
+    display: grid; gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media(min-width:680px){ .prod-grid { grid-template-columns: repeat(3,1fr); } }
+  @media(min-width:980px){ .prod-grid { grid-template-columns: repeat(4,1fr); } }
+
+  .prod-card {
+    background: #fff; border-radius: 10px;
+    overflow: hidden; transition: box-shadow .25s, transform .25s;
+    cursor: pointer;
+  }
+  .prod-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.13); transform: translateY(-4px); }
+
+  .prod-img {
+    aspect-ratio: 3/4; position: relative;
+    background: var(--ink); display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .prod-img .prod-placeholder {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4.5rem; color: rgba(255,255,255,.08);
+    letter-spacing: .04em; text-align: center;
+  }
+  .prod-img .badge-new {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--accent); color: #fff;
+    padding: 3px 10px; border-radius: 3px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .prod-img .badge-combo {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--gold); color: #fff;
+    padding: 3px 10px; border-radius: 3px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .prod-wa {
+    position: absolute; bottom: 10px; right: 10px;
+    background: var(--wa); width: 38px; height: 38px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 1.1rem;
+    opacity: 0; transform: scale(.8);
+    transition: opacity .2s, transform .2s;
+  }
+  .prod-card:hover .prod-wa { opacity: 1; transform: scale(1); }
+  .prod-info { padding: 14px 14px 18px; }
+  .prod-info .p-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: .03em;
+    color: var(--ink); margin-bottom: 4px; line-height: 1.2;
+  }
+  .prod-info .p-sub {
+    font-size: .78rem; color: var(--mid); margin-bottom: 10px;
+  }
+  .prod-info .p-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem; color: var(--accent);
+  }
+  .prod-info .p-price s {
+    font-size: 1rem; color: var(--mid); font-style: normal;
+    text-decoration: line-through; margin-left: 4px;
+  }
+  .prod-info .p-wa-btn {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--wa); color: #fff;
+    padding: 9px 14px; border-radius: 4px; border: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .82rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer; width: 100%; justify-content: center;
+    margin-top: 10px; transition: background .2s;
+  }
+  .prod-info .p-wa-btn:hover { background: var(--wa-dark); }
+
+  /* gradient overlays for product placeholders */
+  .c1{background:linear-gradient(135deg,#1a2a4a,#0d1826);}
+  .c2{background:linear-gradient(135deg,#2d1a0e,#1a0c05);}
+  .c3{background:linear-gradient(135deg,#1b3050,#0d1f35);}
+  .c4{background:linear-gradient(135deg,#1a0707,#3b1515);}
+  .c5{background:linear-gradient(135deg,#152b22,#0a1f16);}
+  .c6{background:linear-gradient(135deg,#2a1a35,#160d20);}
+  .c7{background:linear-gradient(135deg,#35261a,#1a1008);}
+  .c8{background:linear-gradient(135deg,#0d2535,#061824);}
+
+  /* ── TRUST BAR ── */
+  .trust-bar { background: var(--ink); padding: 48px 0; }
+  .trust-grid {
+    display: grid; gap: 28px;
+    grid-template-columns: repeat(2,1fr);
+    text-align: center;
+  }
+  @media(min-width:680px){ .trust-grid { grid-template-columns: repeat(4,1fr); } }
+  .trust-item .t-icon { font-size: 2rem; margin-bottom: 10px; }
+  .trust-item .t-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: #fff;
+  }
+  .trust-item .t-sub {
+    font-size: .8rem; color: rgba(255,255,255,.5); margin-top: 4px;
+  }
+
+  /* ── NEW COLLECTION BANNER ── */
+  .new-coll { padding: 80px 0; background: var(--paper); }
+  .new-coll-inner {
+    display: grid; gap: 36px;
+    grid-template-columns: 1fr;
+  }
+  @media(min-width:768px){ .new-coll-inner { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .nc-visual {
+    border-radius: 12px; overflow: hidden;
+    aspect-ratio: 4/3; position: relative;
+    background: linear-gradient(135deg,#1a2a4a,#3b1515);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .nc-visual .big-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem,10vw,6rem); color: rgba(255,255,255,.07);
+    text-align: center; letter-spacing: .04em; line-height: 1;
+  }
+  .nc-sticker {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--accent); color: #fff;
+    width: 80px; height: 80px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem; line-height: 1.1; letter-spacing: .04em;
+    animation: spin-slow 8s linear infinite;
+  }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .nc-text .nc-steps { margin: 24px 0; display: flex; flex-direction: column; gap: 14px; }
+  .nc-step { display: flex; align-items: flex-start; gap: 12px; }
+  .nc-step .step-num {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: .9rem;
+  }
+  .nc-step p { font-size: .92rem; color: var(--mid); line-height: 1.5; margin-top: 5px; }
+  .nc-step p strong { color: var(--ink); }
+
+  /* ── WHOLESALE ── */
+  .wholesale { padding: 80px 0; background: var(--ink); }
+  .ws-inner {
+    display: grid; gap: 40px;
+    grid-template-columns: 1fr;
+  }
+  @media(min-width:768px){ .ws-inner { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .ws-left .section-title { color: #fff; }
+  .ws-left .section-label { color: #f4896a; }
+  .ws-left p { color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1.65; margin: 18px 0 28px; }
+  .ws-perks { display: flex; flex-direction: column; gap: 14px; }
+  .ws-perk { display: flex; align-items: center; gap: 12px; }
+  .ws-perk .wp-icon { font-size: 1.4rem; }
+  .ws-perk span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    color: #fff;
+  }
+
+  .ws-form {
+    background: var(--paper); border-radius: 12px; padding: 32px 24px;
+  }
+  .ws-form h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem; letter-spacing: .04em; color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 12px 14px; border: 1.5px solid var(--border);
+    border-radius: 6px; background: #fff;
+    font-family: 'Barlow', sans-serif; font-size: .92rem; color: var(--ink);
+    transition: border-color .2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* ── INSTAGRAM ── */
+  .insta-section { padding: 64px 0; background: var(--cream); }
+  .insta-grid {
+    display: grid; gap: 6px;
+    grid-template-columns: repeat(3,1fr);
+  }
+  @media(min-width:600px){ .insta-grid { grid-template-columns: repeat(6,1fr); } }
+  .insta-cell {
+    aspect-ratio: 1; position: relative;
+    overflow: hidden; border-radius: 4px;
+    background: var(--ink); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .insta-cell .ic-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem; color: rgba(255,255,255,.06);
+  }
+  .insta-cell .ic-hover {
+    position: absolute; inset: 0;
+    background: rgba(232,66,26,.85);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 4px;
+    opacity: 0; transition: opacity .2s;
+  }
+  .insta-cell:hover .ic-hover { opacity: 1; }
+  .insta-cell .ic-hover span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .75rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: #fff;
+  }
+
+  .insta-cta { text-align: center; margin-top: 28px; }
+  .insta-handle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem; letter-spacing: .04em; color: var(--ink);
+    text-decoration: none; display: inline-block;
+    border-bottom: 3px solid var(--accent); padding-bottom: 4px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080806; color: rgba(255,255,255,.6);
+    padding: 56px 0 0;
+  }
+  .footer-grid {
+    display: grid; gap: 36px;
+    grid-template-columns: 1fr;
+  }
+  @media(min-width:640px){ .footer-grid { grid-template-columns: repeat(2,1fr); } }
+  @media(min-width:900px){ .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+
+  .footer-brand .logo { color: #fff; font-size: 1.4rem; display: block; margin-bottom: 14px; }
+  .footer-brand p { font-size: .88rem; line-height: 1.65; }
+  .footer-brand .fb-wa {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--wa); color: #fff; text-decoration: none;
+    padding: 11px 18px; border-radius: 4px; margin-top: 18px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: .9rem; letter-spacing: .06em; text-transform: uppercase;
+    transition: background .2s;
+  }
+  .footer-brand .fb-wa:hover { background: var(--wa-dark); }
+
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.3); margin-bottom: 16px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    color: rgba(255,255,255,.55); text-decoration: none; font-size: .9rem;
+    transition: color .2s;
+  }
+  .footer-col ul li a:hover { color: #fff; }
+
+  .footer-address { font-size: .88rem; line-height: 1.7; }
+  .footer-address strong { color: #fff; display: block; margin-bottom: 4px; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.08);
+    margin-top: 48px; padding: 20px 0;
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: .8rem; }
+
+  /* ── FLOATING WA ── */
+  .wa-float {
+    position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+    background: var(--wa); color: #fff;
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.7rem; text-decoration: none;
+    box-shadow: 0 4px 24px rgba(37,211,102,.4);
+    animation: float-bob 3s ease-in-out infinite;
+    transition: background .2s;
+  }
+  .wa-float:hover { background: var(--wa-dark); }
+  @keyframes float-bob {
+    0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}
+  }
+  .wa-float::after {
+    content: '';
+    position: absolute; inset: -6px; border-radius: 50%;
+    border: 2px solid rgba(37,211,102,.35);
+    animation: ring-pulse 2s ease-out infinite;
+  }
+  @keyframes ring-pulse {
+    0%{transform:scale(1);opacity:1} 100%{transform:scale(1.5);opacity:0}
+  }
+
+  /* ── COMBO BANNER ── */
+  .combo-banner {
+    background: var(--accent); padding: 48px 0;
+    text-align: center;
+  }
+  .combo-banner h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem,6vw,3.5rem); color: #fff; letter-spacing: .04em;
+    margin-bottom: 8px;
+  }
+  .combo-banner p { color: rgba(255,255,255,.8); font-size: .95rem; margin-bottom: 24px; }
+  .combo-banner a {
+    background: #fff; color: var(--accent);
+    padding: 13px 28px; border-radius: 4px; text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem; letter-spacing: .06em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: opacity .2s;
+  }
+  .combo-banner a:hover { opacity: .9; }
+
+  /* animations on scroll */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── PAGE SECTIONS for SPA ── */
+  .page { display: none; }
+  .page.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>Pan India Delivery Available 🚚</span>
+    <span>Retail &amp; Wholesale Available</span>
+    <span>New Collection Launched Weekly</span>
+    <span>Combos Starting ₹749</span>
+    <span>WhatsApp Orders: 7248166578</span>
+    <span>Physical Store: PVS Road, Meerut</span>
+    <span>Pan India Delivery Available 🚚</span>
+    <span>Retail &amp; Wholesale Available</span>
+    <span>New Collection Launched Weekly</span>
+    <span>Combos Starting ₹749</span>
+    <span>WhatsApp Orders: 7248166578</span>
+    <span>Physical Store: PVS Road, Meerut</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo" onclick="showPage('home')">
+      MARK<span>.</span>CLOTHING
+      <small>Meerut's Fashion Destination</small>
+    </a>
+
+    <nav>
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#products">Shop</a>
+      <a href="#" onclick="showPage('wholesale')">Wholesale</a>
+      <a href="#footer">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="wa-header" href="https://wa.me/917248166578?text=Hi!%20I%20saw%20your%20website%20and%20want%20to%20place%20an%20order." target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order Now
+      </a>
+      <div class="hamburger" onclick="toggleMenu()" id="ham">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#" onclick="showPage('home');toggleMenu()">🏠 Home</a>
+    <a href="#categories" onclick="toggleMenu()">👕 Categories</a>
+    <a href="#products" onclick="toggleMenu()">🛍️ Shop All</a>
+    <a href="#" onclick="showPage('wholesale');toggleMenu()">📦 Wholesale</a>
+    <a href="#footer" onclick="toggleMenu()">📍 Contact</a>
+    <a href="https://wa.me/917248166578" target="_blank">💬 WhatsApp Us</a>
+    <a href="https://instagram.com/markclothestore" target="_blank">📸 Instagram</a>
+  </div>
+</header>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-number">749</div>
+  <div class="container">
+    <div class="hero-content reveal">
+      <div class="hero-badge">🚚 Retail &amp; Wholesale · Pan India Delivery</div>
+      <h1>MARK<br><em>CLOTHING</em><br>STORE</h1>
+      <p class="hero-sub">Meerut's favourite destination for budget-friendly men's &amp; boys' fashion. Fresh collections every week — starting ₹749.</p>
+      <div class="hero-pills">
+        <span class="pill">Shirts</span>
+        <span class="pill">Combos</span>
+        <span class="pill">Jeans</span>
+        <span class="pill">Boys Wear</span>
+        <span class="pill">New Arrivals</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn-primary" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20from%20Mark%20Clothing%20Store." target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Shop on WhatsApp
+        </a>
+        <span class="hero-price-tag">Starting at <strong>&nbsp;₹749</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-label">Browse by Category</p>
+      <h2 class="section-title">Shop by Style</h2>
+    </div>
+    <div class="cats-grid">
+      <div class="cat-card cat-shirts featured reveal" onclick="filterProducts('shirts')">
+        <div class="cat-bg">SHIRT</div>
+        <div class="cat-overlay"></div>
+        <div class="cat-icon">👔</div>
+        <div class="cat-info">
+          <h3>Shirts</h3>
+          <p>Casual &amp; Semi-Formal · From ₹399</p>
+        </div>
+      </div>
+      <div class="cat-card cat-combos reveal" onclick="filterProducts('combos')">
+        <div class="cat-bg">COMBO</div>
+        <div class="cat-overlay"></div>
+        <div class="cat-icon">✨</div>
+        <div class="cat-info">
+          <h3>Combos</h3>
+          <p>From ₹749</p>
+        </div>
+      </div>
+      <div class="cat-card cat-jeans reveal" onclick="filterProducts('jeans')">
+        <div class="cat-bg">JEANS</div>
+        <div class="cat-overlay"></div>
+        <div class="cat-icon">👖</div>
+        <div class="cat-info">
+          <h3>Jeans</h3>
+          <p>From ₹499</p>
+        </div>
+      </div>
+      <div class="cat-card cat-new reveal" onclick="filterProducts('new')">
+        <div class="cat-bg">NEW</div>
+        <div class="cat-overlay"></div>
+        <div class="cat-icon">🔥</div>
+        <div class="cat-info">
+          <h3>New Arrivals</h3>
+          <p>Latest drops</p>
+        </div>
+      </div>
+      <div class="cat-card cat-boys reveal" onclick="filterProducts('boys')">
+        <div class="cat-bg">BOYS</div>
+        <div class="cat-overlay"></div>
+        <div class="cat-icon">🧒</div>
+        <div class="cat-info">
+          <h3>Boys Wear</h3>
+          <p>From ₹299</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP BY PRICE -->
+<section class="price-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-label">Shop by Price</p>
+      <h2 class="section-title">Budget Friendly Picks</h2>
+    </div>
+    <div class="price-grid">
+      <a class="price-card reveal" href="https://wa.me/917248166578?text=I%20want%20items%20under%20₹499" target="_blank">
+        <div class="pc-icon">💚</div>
+        <div class="pc-range">Under ₹499</div>
+        <div class="pc-label">Entry Range</div>
+      </a>
+      <a class="price-card reveal" href="https://wa.me/917248166578?text=I%20want%20items%20under%20₹699" target="_blank">
+        <div class="pc-icon">💛</div>
+        <div class="pc-range">₹500–₹699</div>
+        <div class="pc-label">Popular Range</div>
+      </a>
+      <a class="price-card reveal" href="https://wa.me/917248166578?text=I%20want%20combos%20around%20₹749%20to%20₹849" target="_blank">
+        <div class="pc-icon">🧡</div>
+        <div class="pc-range">₹700–₹849</div>
+        <div class="pc-label">Best Sellers</div>
+      </a>
+      <a class="price-card reveal" href="https://wa.me/917248166578?text=I%20want%20premium%20combos" target="_blank">
+        <div class="pc-icon">❤️</div>
+        <div class="pc-range">₹850–₹999</div>
+        <div class="pc-label">Premium Combos</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-label">Trending Now</p>
+      <h2 class="section-title">New Collection</h2>
+    </div>
+
+    <!-- Filter tabs -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;" id="filterTabs">
+      <button class="btn-primary" onclick="filterProducts('all')" style="padding:8px 18px;font-size:.8rem;">All</button>
+      <button class="btn-outline" onclick="filterProducts('combos')" style="padding:8px 18px;font-size:.8rem;">Combos</button>
+      <button class="btn-outline" onclick="filterProducts('shirts')" style="padding:8px 18px;font-size:.8rem;">Shirts</button>
+      <button class="btn-outline" onclick="filterProducts('jeans')" style="padding:8px 18px;font-size:.8rem;">Jeans</button>
+      <button class="btn-outline" onclick="filterProducts('boys')" style="padding:8px 18px;font-size:.8rem;">Boys</button>
+      <button class="btn-outline" onclick="filterProducts('new')" style="padding:8px 18px;font-size:.8rem;">New Arrivals</button>
+    </div>
+
+    <div class="prod-grid" id="prodGrid">
+      <!-- Shirts -->
+      <div class="prod-card" data-cat="shirts new">
+        <div class="prod-img c1">
+          <div class="prod-placeholder">SHIRT</div>
+          <span class="badge-new">NEW</span>
+          <a class="prod-wa" href="https://wa.me/917248166578?text=I%20want%20Printed%20Casual%20Shirt" target="_blank">💬</a>
+        </div>
+        <div class="prod-info">
+          <p class="p-name">Printed Casual Shirt</p>
+          <p class="p-sub">Men's · S–XXL Available</p>
+          <p class="p-price">₹449 <s>₹699</s></p>
+          <a class="p-wa-btn" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20Printed%20Casual%20Shirt." target="_blank">💬 Order on WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Combos -->
+      <div class="prod-card" data-cat="combos new">
+        <div class="prod-img c2">
+          <div class="prod-placeholder">COMBO</div>
+          <span class="badge-combo">COMBO</span>
+          <a class="prod-wa" href="https://wa.me/917248166578?text=I%20want%20Shirt+Trouser%20Combo" target="_blank">💬</a>
+        </div>
+        <div class="prod-info">
+          <p class="p-name">Shirt + Trouser Combo</p>
+          <p class="p-sub">2-Piece Set · Multiple Colours</p>
+          <p class="p-price">₹749</p>
+          <a class="p-wa-btn" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20Shirt+Trouser%20Combo%20at%20₹749." target="_blank">💬 Order on WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Jeans -->
+      <div class="prod-card" data-cat="jeans">
+        <div class="prod-img c3">
+          <div class="prod-placeholder">JEANS</div>
+          <a class="prod-wa" href="https://wa.me/917248166578?text=I%20want%20Slim%20Fit%20Jeans" target="_blank">💬</a>
+        </div>
+        <div class="prod-info">
+          <p class="p-name">Slim Fit Denim Jeans</p>
+          <p class="p-sub">Men's · 28–40 Waist</p>
+          <p class="p-price">₹549 <s>₹799</s></p>
+          <a class="p-wa-btn" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20Slim%20Fit%20Jeans." target="_blank">💬 Order on WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Combo -->
+      <div class="prod-card" data-cat="combos">
+        <div class="prod-img c4">
+          <div class="prod-placeholder">COMBO</div>
+          <span class="badge-combo">BESTSELLER</span>
+          <a class="prod-wa" href="https://wa.me/917248166578?text=I%20want%20Premium%20Outfit%20Combo" target="_blank">💬</a>
+        </div>
+        <div class="prod-info">
+          <p class="p-name">Premium Outfit Combo</p>
+          <p class="p-sub">Shirt + Lower · Latest Design</p>
+          <p class="p-price">₹849</p>
+          <a class="p-wa-btn" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20Premium%20Outfit%20Combo%20at%20₹849." target="_blank">💬 Order on WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Boys -->
+      <div class="prod-card" data-cat="boys new">
+        <div class="prod-img c5">
+          <div class="prod-placeholder">BOYS</div>
+          <span class="badge-new">NEW</span>
+          <a class="prod-wa" href="https://wa.me/917248166578?text=I%20want%20Boys%20Casual%20Set" target="_blank">💬</a>
+        </div>
+        <div class="prod-info">
+          <p class="p-name">Boys Casual Set</p>
+          <p class="p-sub">Kids · Age 4–14 Years</p>
+          <p class="p-price">₹349 <s>₹499</s></p>
+          <a class="p-wa-btn" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20Boys%20Casual%20Set." target="_blank">💬 Order on WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Shirt -->
+      <div class="prod-card" data-cat="shirts">
+        <div class="prod-img c6">
+          <div class="prod-placeholder">SHIRT</div>
+          <a class="prod-wa" href="https://wa.me/917248166578?text=I%20want%20Half%20Sleeve%20Shirt" target="_blank">💬</a>
+        </div>
+        <div class="prod-info">
+          <p class="p-name">Half Sleeve Solid Shirt</p>
+          <p class="p-sub">Men's · Premium Cotton</p>
+          <p class="p-price">₹399</p>
+          <a class="p-wa-btn" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20Half%20Sleeve%20Shirt." target="_blank">💬 Order on WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Combo 3 -->
+      <div class="prod-card" data-cat="combos new">
+        <div class="prod-img c7">
+          <div class="prod-placeholder">COMBO</div>
+          <span class="badge-new">TRENDING</span>
+          <a class="prod-wa" href="https://wa.me/917248166578?text=I%20want%20Casual%20Day%20Combo" target="_blank">💬</a>
+        </div>
+        <div class="prod-info">
+          <p class="p-name">Casual Day Combo</p>
+          <p class="p-sub">Full Set · Summer Ready</p>
+          <p class="p-price">₹899</p>
+          <a class="p-wa-btn" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20Casual%20Day%20Combo%20at%20₹899." target="_blank">💬 Order on WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- Boys 2 -->
+      <div class="prod-card" data-cat="boys jeans">
+        <div class="prod-img c8">
+          <div class="prod-placeholder">JEANS</div>
+          <a class="prod-wa" href="https://wa.me/917248166578?text=I%20want%20Boys%20Denim%20Jeans" target="_blank">💬</a>
+        </div>
+        <div class="prod-info">
+          <p class="p-name">Boys Denim Jeans</p>
+          <p class="p-sub">Kids · Age 4–14 Years</p>
+          <p class="p-price">₹299 <s>₹449</s></p>
+          <a class="p-wa-btn" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20order%20Boys%20Denim%20Jeans." target="_blank">💬 Order on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <a class="btn-primary" href="https://wa.me/917248166578?text=Hi!%20Please%20share%20your%20full%20catalogue." target="_blank">
+        View Full Catalogue on WhatsApp →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <div class="t-icon">🚚</div>
+        <div class="t-label">Pan India Delivery</div>
+        <div class="t-sub">Fast shipping across India</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="t-icon">💰</div>
+        <div class="t-label">Budget Prices</div>
+        <div class="t-sub">Starting at just ₹749</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="t-icon">🔄</div>
+        <div class="t-label">Weekly New Drops</div>
+        <div class="t-sub">Fresh collections every week</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="t-icon">📦</div>
+        <div class="t-label">Wholesale Available</div>
+        <div class="t-sub">Bulk orders welcome</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMBO BANNER -->
+<div class="combo-banner">
+  <div class="container reveal">
+    <h2>🔥 Trending Combos — Starting ₹749</h2>
+    <p>Shirt + Trouser / Shirt + Lower sets — ready-to-wear outfits at unbeatable prices.</p>
+    <a href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20see%20your%20latest%20combo%20collection." target="_blank">
+      💬 WhatsApp for Latest Combos →
+    </a>
+  </div>
+</div>
+
+<!-- NEW COLLECTION -->
+<section class="new-coll" id="new-collection">
+  <div class="container">
+    <div class="new-coll-inner">
+      <div class="nc-visual reveal">
+        <div class="big-text">NEW<br>COLL<br>2025</div>
+        <div class="nc-sticker">NEW<br>DROP<br>🔥</div>
+      </div>
+      <div class="nc-text reveal">
+        <p class="section-label">How to Order</p>
+        <h2 class="section-title">Easy WhatsApp<br>Ordering</h2>
+        <div class="nc-steps">
+          <div class="nc-step">
+            <div class="step-num">1</div>
+            <p><strong>Browse &amp; Pick</strong> — Check our website or Instagram <a href="https://instagram.com/markclothestore" target="_blank" style="color:var(--accent)">@markclothestore</a> for the latest collection.</p>
+          </div>
+          <div class="nc-step">
+            <div class="step-num">2</div>
+            <p><strong>WhatsApp Us</strong> — Send us your item, size, and full delivery address on <a href="https://wa.me/917248166578" target="_blank" style="color:var(--accent)">7248166578</a>.</p>
+          </div>
+          <div class="nc-step">
+            <div class="step-num">3</div>
+            <p><strong>Pay &amp; Confirm</strong> — Pay via UPI / GPay / PhonePe or COD. We'll confirm &amp; dispatch within 24 hrs.</p>
+          </div>
+          <div class="nc-step">
+            <div class="step-num">4</div>
+            <p><strong>Receive &amp; Enjoy!</strong> — Fast delivery anywhere in India 🚚</p>
+          </div>
+        </div>
+        <a class="btn-primary" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20place%20an%20order." target="_blank">
+          Start Ordering Now →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="insta-section">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center;">
+      <p class="section-label">Follow Us</p>
+      <h2 class="section-title">@markclothestore</h2>
+      <p style="color:var(--mid);margin-top:8px;font-size:.95rem;">20K+ Followers · New Reels Daily · Trending Outfits</p>
+    </div>
+    <div class="insta-grid reveal" style="margin-top:28px;">
+      <div class="insta-cell c1"><div class="ic-text">MC</div><div class="ic-hover"><span>📸</span><span>View Post</span></div></div>
+      <div class="insta-cell c2"><div class="ic-text">MC</div><div class="ic-hover"><span>🎬</span><span>View Reel</span></div></div>
+      <div class="insta-cell c3"><div class="ic-text">MC</div><div class="ic-hover"><span>📸</span><span>View Post</span></div></div>
+      <div class="insta-cell c4"><div class="ic-text">MC</div><div class="ic-hover"><span>🎬</span><span>View Reel</span></div></div>
+      <div class="insta-cell c5"><div class="ic-text">MC</div><div class="ic-hover"><span>📸</span><span>View Post</span></div></div>
+      <div class="insta-cell c6"><div class="ic-text">MC</div><div class="ic-hover"><span>🎬</span><span>View Reel</span></div></div>
+    </div>
+    <div class="insta-cta reveal">
+      <a class="insta-handle" href="https://instagram.com/markclothestore" target="_blank">Follow on Instagram →</a>
+    </div>
+  </div>
+</section>
+
+</div><!-- end page-home -->
+
+<!-- WHOLESALE PAGE -->
+<div class="page" id="page-wholesale">
+  <section class="wholesale" style="min-height:calc(100vh - 120px);padding-top:80px;">
+    <div class="container">
+      <div class="ws-inner">
+        <div class="ws-left">
+          <p class="section-label" style="color:#f4896a;">B2B Enquiries</p>
+          <h2 class="section-title" style="color:#fff;">Wholesale<br>Available</h2>
+          <p>We offer bulk pricing for retailers, resellers &amp; boutiques across India. Get the best rates on shirts, combos, jeans &amp; boys wear with flexible MOQ.</p>
+          <div class="ws-perks">
+            <div class="ws-perk"><span class="wp-icon">📦</span><span>Low Minimum Order Quantity</span></div>
+            <div class="ws-perk"><span class="wp-icon">💰</span><span>Best Wholesale Rates</span></div>
+            <div class="ws-perk"><span class="wp-icon">🚚</span><span>Pan India Delivery</span></div>
+            <div class="ws-perk"><span class="wp-icon">🔄</span><span>Weekly New Stock Available</span></div>
+            <div class="ws-perk"><span class="wp-icon">📱</span><span>Direct WhatsApp Support</span></div>
+          </div>
+          <div style="margin-top:28px;">
+            <a class="btn-primary" href="https://wa.me/917248166578?text=Hi!%20I%20am%20interested%20in%20wholesale%20enquiry." target="_blank">
+              💬 WhatsApp for Wholesale
+            </a>
+          </div>
+          <p style="color:rgba(255,255,255,.35);font-size:.8rem;margin-top:12px;">
+            Also follow: @markclothewholesaler on Instagram
+          </p>
+        </div>
+
+        <div class="ws-form">
+          <h3>Wholesale Enquiry Form</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input type="text" id="ws-name" placeholder="Full name">
+            </div>
+            <div class="form-group">
+              <label>Business Name</label>
+              <input type="text" id="ws-biz" placeholder="Shop / brand name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Number *</label>
+            <input type="tel" id="ws-phone" placeholder="10-digit mobile number">
+          </div>
+          <div class="form-group">
+            <label>City / State *</label>
+            <input type="text" id="ws-city" placeholder="e.g. Delhi, Mumbai, Jaipur...">
+          </div>
+          <div class="form-group">
+            <label>Product Interest</label>
+            <select id="ws-cat">
+              <option value="">-- Select Category --</option>
+              <option>Shirts</option>
+              <option>Combos / Outfits</option>
+              <option>Jeans / Trousers</option>
+              <option>Boys Wear</option>
+              <option>All Categories</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Approx. Monthly Quantity</label>
+            <select id="ws-qty">
+              <option value="">-- Select Range --</option>
+              <option>10–50 Pieces</option>
+              <option>50–100 Pieces</option>
+              <option>100–500 Pieces</option>
+              <option>500+ Pieces</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Additional Message</label>
+            <textarea id="ws-msg" placeholder="Tell us more about your requirements..."></textarea>
+          </div>
+          <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitWholesale()">
+            Submit Enquiry → WhatsApp
+          </button>
+          <p style="font-size:.75rem;color:var(--mid);margin-top:10px;text-align:center;">
+            Your enquiry will open directly on WhatsApp for instant response.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" onclick="showPage('home')">MARK<span style="color:var(--accent)">.</span>CLOTHING</a>
+        <p>Meerut's favourite budget fashion store. Retail &amp; wholesale clothing for men and boys — with Pan India delivery and weekly new collections.</p>
+        <a class="fb-wa" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20shop%20from%20Mark%20Clothing." target="_blank">
+          💬 WhatsApp: 7248166578
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#" onclick="filterProducts('shirts');showPage('home')">Shirts</a></li>
+          <li><a href="#" onclick="filterProducts('combos');showPage('home')">Combos</a></li>
+          <li><a href="#" onclick="filterProducts('jeans');showPage('home')">Jeans</a></li>
+          <li><a href="#" onclick="filterProducts('boys');showPage('home')">Boys Wear</a></li>
+          <li><a href="#" onclick="filterProducts('new');showPage('home')">New Arrivals</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('wholesale')">Wholesale Enquiry</a></li>
+          <li><a href="https://instagram.com/markclothestore" target="_blank">Instagram</a></li>
+          <li><a href="https://instagram.com/markclothewholesaler" target="_blank">Wholesale IG</a></li>
+          <li><a href="https://wa.me/917248166578" target="_blank">WhatsApp Order</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Visit Our Store</h4>
+        <div class="footer-address">
+          <strong>MARK CLOTHING STORE</strong>
+          PVS Road, Nearby SBI Bank,<br>
+          Meerut, Uttar Pradesh<br>
+          India — 250001<br><br>
+          <strong>📞 WhatsApp / Call</strong>
+          <a href="https://wa.me/917248166578" style="color:var(--wa);text-decoration:none;">7248166578</a><br><br>
+          <strong>🕐 Hours</strong>
+          Mon–Sun: 10 AM – 9 PM
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Mark Clothing Store, Meerut. All rights reserved.</p>
+      <div style="display:flex;gap:16px;">
+        <a href="https://instagram.com/markclothestore" target="_blank" style="color:rgba(255,255,255,.4);text-decoration:none;font-size:.85rem;">Instagram</a>
+        <a href="https://wa.me/917248166578" target="_blank" style="color:rgba(255,255,255,.4);text-decoration:none;font-size:.85rem;">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a class="wa-float" href="https://wa.me/917248166578?text=Hi!%20I%20want%20to%20shop%20from%20Mark%20Clothing%20Store." target="_blank" title="Order on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // PAGE SWITCHER
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // MOBILE NAV
+  function toggleMenu() {
+    const nav = document.getElementById('mobileNav');
+    nav.classList.toggle('open');
+  }
+
+  // PRODUCT FILTER
+  function filterProducts(cat) {
+    const cards = document.querySelectorAll('.prod-card');
+    cards.forEach(card => {
+      const cats = card.getAttribute('data-cat') || '';
+      card.style.display = (cat === 'all' || cats.includes(cat)) ? '' : 'none';
+    });
+    // update tab states
+    document.querySelectorAll('#filterTabs button').forEach((btn, i) => {
+      const categories = ['all','combos','shirts','jeans','boys','new'];
+      if (categories[i] === cat) {
+        btn.className = 'btn-primary';
+        btn.style.cssText = 'padding:8px 18px;font-size:.8rem;';
+      } else {
+        btn.className = 'btn-outline';
+        btn.style.cssText = 'padding:8px 18px;font-size:.8rem;';
+      }
+    });
+    // Scroll to products on home
+    if (document.getElementById('page-home').classList.contains('active')) {
+      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      showPage('home');
+      setTimeout(() => {
+        filterProducts(cat);
+        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+      }, 200);
+    }
+  }
+
+  // WHOLESALE FORM SUBMIT → WhatsApp
+  function submitWholesale() {
+    const name = document.getElementById('ws-name').value.trim();
+    const phone = document.getElementById('ws-phone').value.trim();
+    const city = document.getElementById('ws-city').value.trim();
+    const biz = document.getElementById('ws-biz').value.trim();
+    const cat = document.getElementById('ws-cat').value;
+    const qty = document.getElementById('ws-qty').value;
+    const msg = document.getElementById('ws-msg').value.trim();
+
+    if (!name || !phone) {
+      alert('Please fill in your name and WhatsApp number.');
+      return;
+    }
+    if (phone.length < 10) {
+      alert('Please enter a valid 10-digit mobile number.');
+      return;
+    }
+
+    const waMsg = encodeURIComponent(
+      `*WHOLESALE ENQUIRY — MARK CLOTHING STORE*\n\n` +
+      `👤 Name: ${name}\n` +
+      `🏪 Business: ${biz || 'N/A'}\n` +
+      `📱 Phone: ${phone}\n` +
+      `📍 City: ${city || 'N/A'}\n` +
+      `🛍️ Category: ${cat || 'N/A'}\n` +
+      `📦 Quantity: ${qty || 'N/A'}\n` +
+      `📝 Message: ${msg || 'N/A'}`
+    );
+    window.open(`https://wa.me/917248166578?text=${waMsg}`, '_blank');
+  }
+
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
